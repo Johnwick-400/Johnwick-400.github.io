@@ -2428,24 +2428,7 @@ main.touch .main-wrap {
     padding-top: 125%;
 }
 
-.about-awwwards .single-image .overlay:nth-child(1) {
-    background: url("../img/Singapore_Vertical.jpg") center center no-repeat;
-    background-size: cover;
-    height: 100%;
-    top: -25%;
-    width: 105%;
-    left: -25%;
-    background: url("../img/Singapore_Vertical.jpg") center center no-repeat;
-    background-size: cover;
-    top: -3%;
-    height: 106%;
-    width: 140%;
-    left: -09%;
-}
 
-.about-awwwards .single-image .overlay:nth-child(2) {
-    background: linear-gradient(to bottom, hsla(220, 13%, 5%, .075) 0%, hsla(220, 13%, 5%, 0) 50%);
-}
 
 @media screen and (max-width: 720px) {
     .about-awwwards {
@@ -2464,14 +2447,7 @@ main.touch .main-wrap {
     .about-awwwards .single-image::before {
         padding-top: 125%;
     }
-    .about-awwwards .single-image .overlay:nth-child(1) {
-        background: url("../img/Singapore.jpg") center center no-repeat;
-        background-size: cover;
-        top: -8%;
-        height: 110%;
-        width: 150%;
-        left: -7%;
-    }
+   
 }
 
 /* ------------------------- FAQ - Section -------------------------------------------------- */

@@ -1004,13 +1004,7 @@ main .btn-hamburger.active {
     display: block
 }
 
-@media screen and (max-width:1024px) {
-    #about:before {
-        position: absolute;
-        width: 100%;
-        height: 60vh;
-        background-image: linear-gradient(270deg, var(--bg), rgba(var(--bg-rgb), 0) 80%), linear-gradient(0deg, var(--bg), rgba(var(--bg-rgb), 0) 60%), url(../img/iuri-de-paula.16d3bf63.jpg)
-    }
+
 
     #about .about-grid {
         padding: 3rem 1rem 0 0;
@@ -1031,11 +1025,7 @@ main .btn-hamburger.active {
     }
 }
 
-@media screen and (max-width:568px) {
-    #about:before {
-        height: 80vh;
-        background-image: linear-gradient(270deg, var(--bg), rgba(var(--bg-rgb), 0) 50%), linear-gradient(0deg, var(--bg), rgba(var(--bg-rgb), 0) 60%), url(../img/iuri-de-paula.16d3bf63.jpg)
-    }
+
 
     #about .static-container {
         padding-top: 65vh
@@ -1463,22 +1453,6 @@ main .btn-hamburger.active {
     overflow: hidden;
 }
 
-.form .checkbox-button .custom-check:after {
-    display: block;
-    opacity: 0;
-    visibility: hidden;
-    content: "";
-    width: 100%;
-    height: 100%;
-    left: 0;
-    top: 0;
-    position: absolute;
-    background-color: var(--color-blue);
-    background-image: url("../img/Singapore.jpg");
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-}
 
 .form .checkbox-button input:checked~.custom-check:after {
     opacity: 1;
