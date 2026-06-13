@@ -1160,6 +1160,13 @@ function initTricksWords() {
 /**
  * Contact Form
  */
+// Backend that actually sends the email. Credentials live ONLY on that server,
+// never here. Replace the production URL with your deployed contact-mailer service.
+const MAILER_ENDPOINT =
+    (location.hostname === 'localhost' || location.hostname === '127.0.0.1')
+        ? 'http://localhost:3000/send'
+        : 'https://contact-mailer-backend.onrender.com/send';
+
 function initContactForm() {
 
     $('.field').on('input', function() {
@@ -1171,6 +1178,55 @@ function initContactForm() {
             var text_val = $(this).val();
             $(this).parent().toggleClass('not-empty', text_val !== "");
         }).focusout();
+    });
+
+    const form = document.getElementById('contact-form');
+    if (!form || form.dataset.bound === 'true') return;
+    form.dataset.bound = 'true';
+
+    const notify = (icon, title, text) => {
+        if (typeof Swal !== 'undefined') {
+            Swal.fire({ icon, title, text, confirmButtonColor: '#1C1D20' });
+        } else {
+            alert(title + '\n\n' + text);
+        }
+    };
+
+    form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        const btn = form.querySelector('.form-btn');
+        const original = btn ? btn.textContent : '';
+        const val = (sel) => (form.querySelector(sel)?.value || '').trim();
+
+        const payload = {
+            name: val('#form-name'),
+            email: val('#form-email'),
+            company: val('#form-company'),
+            service: val('#form-service'),
+            message: val('#form-message'),
+            tel: form.querySelector('#form-tel')?.value || '', // honeypot
+        };
+
+        if (btn) { btn.textContent = 'Sending...'; btn.disabled = true; }
+
+        try {
+            const res = await fetch(MAILER_ENDPOINT, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload),
+            });
+            const data = await res.json().catch(() => ({}));
+            if (!res.ok || !data.ok) throw new Error(data.error || 'Something went wrong.');
+
+            form.reset();
+            $('.field').parent().removeClass('not-empty');
+            notify('success', 'Message sent!', "Thanks for reaching out — I'll get back to you soon.");
+        } catch (err) {
+            notify('error', "Couldn't send", err.message + ' You can also email me directly at pavantejveesam26@gmail.com.');
+        } finally {
+            if (btn) { btn.textContent = original || 'Send it!'; btn.disabled = false; }
+        }
     });
 
 }
